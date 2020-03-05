@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="questionHandlerFactory" class="otus.spring.albot.lesson1.handler.QuestionHandlerFactory"/>
+    <bean id="gameManager" class="otus.spring.albot.lesson1.game.GameManager">
+        <constructor-arg name="factory" ref="questionHandlerFactory"/>
+    </bean>
+    <bean id="csvParser" class="otus.spring.albot.lesson1.util.QuizParser">
+        <constructor-arg name="fileName" value="/quiz.csv"/>
+    </bean>
+    <bean id="questionPreparer" class="otus.spring.albot.lesson1.util.QuestionsPreparer"/>
+
+</beans>
