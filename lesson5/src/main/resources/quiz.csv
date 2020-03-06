@@ -1,0 +1,8 @@
+C,[(question.octopus)],8,5,6,7,8
+O,[(question.ice)],0
+TF,[(question.london)],false
+C,[(question.war)],1939,1939,1940,1941,1942
+O,[(question.math)],6
+TF,[(question.australia)],false
+C,[(question.byte)],1024,8,1000,1024
+C,[(question.usa.capital)],[(question.usa.capital.washington)],[(question.usa.capital.boston)],[(question.usa.capital.newYork)],[(question.usa.capital.lasVegas)],[(question.usa.capital.washington)]

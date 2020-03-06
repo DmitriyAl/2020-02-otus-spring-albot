@@ -1,0 +1,19 @@
+game:
+  greeting: game.greeting
+  rules: game.rules
+  result: game.result
+  amount: 5
+
+path:
+  questions: /quiz.csv
+  localization: /localization/bundle
+
+localization:
+#available values for localization.language are "ru-Ru" or "en"
+  language: ru-RU
+
+encoding: windows-1251
+
+pattern:
+  open: '[('
+  close: ')]'
