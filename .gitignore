@@ -82,4 +82,4 @@ fabric.properties
 
 log.txt
 
-lesson4/.gitignore
+lesson*/.gitignore
