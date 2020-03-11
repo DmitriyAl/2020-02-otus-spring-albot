@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>otus.spring.albot</groupId>
-    <artifactId>demolesson16</artifactId>
+    <artifactId>lesson16</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>lesson16</name>
     <description>Demo project for Spring Boot</description>
