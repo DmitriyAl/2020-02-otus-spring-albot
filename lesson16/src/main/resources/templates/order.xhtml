@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Order</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="header :: div"/>
+<div class="container">
+    <h3 th:text="#{orderList(${order.id})}">Order number 1</h3>
+    <a th:href="@{/order/remove(id=${order.id})}" th:text="#{order.delete}">Delete order</a>
+    <form th:action="@{/order/modify}" method="post">
+        <input type="hidden" name="orderId" th:value="${order.id}"/>
+        <input type="submit" th:value="#{order.modify}"/>
+    </form>
+    <div class="card-deck product-list">
+        <div th:each="product, iter : ${order.products}" class="card col-4 p-0">
+            <img src="https://via.placeholder.com/372x252" class="card-img-top" alt="..."/>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a th:href="@{/products/__${product.id}__}" th:text="${product.name}">link</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
