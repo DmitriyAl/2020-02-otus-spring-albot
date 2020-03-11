@@ -1,11 +1,11 @@
 package otus.spring.albot.lesson7.repo;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import otus.spring.albot.lesson7.entity.Genre;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Dmitrii Albot
  */
 @JdbcTest
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @Import(GenreRepoImpl.class)
 public class GenreRepoImplTest {
     @Autowired
