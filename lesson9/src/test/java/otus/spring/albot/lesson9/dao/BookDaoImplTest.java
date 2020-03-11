@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Dmitrii Albot
  */
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Import(BookDaoImpl.class)
 public class BookDaoImplTest {

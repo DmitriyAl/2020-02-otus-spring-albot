@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Dmitrii Albot
  */
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 @Import(AuthorDaoImpl.class)
 public class AuthorDaoImplTest {
