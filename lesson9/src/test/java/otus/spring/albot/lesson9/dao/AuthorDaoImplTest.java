@@ -29,7 +29,7 @@ public class AuthorDaoImplTest {
 
     @Test
     public void findAllAuthors() throws Exception {
-        assertThat(authorDao.findAllAuthors()).hasSize(3).allMatch(author -> author.getName() != null)
+        assertThat(authorDao.findAllAuthors()).hasSize(4).allMatch(author -> author.getName() != null)
                 .allMatch(author -> author.getId() != 0);
     }
 
