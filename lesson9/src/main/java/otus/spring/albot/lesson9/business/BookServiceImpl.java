@@ -12,6 +12,8 @@ import otus.spring.albot.lesson9.entity.Book;
 import otus.spring.albot.lesson9.entity.Comment;
 import otus.spring.albot.lesson9.entity.Genre;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -39,5 +41,15 @@ public class BookServiceImpl implements BookService {
             commentDao.removeCommentById(comment.getId());
         }
         bookDao.deleteBook(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Book> findAllBooksByAuthorId(long authorId) {
+        Author author = authorDao.findById(authorId);
+        if (author != null) {
+            return new ArrayList<>(author.getBooks());
+        }
+        return Collections.emptyList();
     }
 }

@@ -71,6 +71,11 @@ public class ShellController {
         return bookDao.findAllBooks();
     }
 
+    @ShellMethod(value = "Get all books by author. Parameter 'authorId'", key = {"get-all-books-by-author", "gabba"})
+    public List<Book> getAllBooksByAuthor(@ShellOption long authorId) {
+        return bookService.findAllBooksByAuthorId(authorId);
+    }
+
     @ShellMethod(value = "Get book by template. Parameters: 'template'.", key = {"get-books-by-template", "gbt"})
     public List<Book> getBooksByTemplate(@ShellOption String template) {
         return bookDao.findBookByName(template);
