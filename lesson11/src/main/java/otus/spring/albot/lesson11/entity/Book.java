@@ -24,7 +24,7 @@ import java.util.List;
 @ToString(exclude = "notes")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "name")
     private String name;
@@ -34,7 +34,7 @@ public class Book {
     @ManyToOne(targetEntity = Genre.class, cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id")
     private Genre genre;
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Note> notes;
 
     public Book(String name, Author author, Genre genre) {

@@ -21,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Note {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "note")
     private String note;

@@ -1,6 +1,10 @@
 spring:
   datasource:
     data: test-data.sql
+    url: jdbc:postgresql://localhost:5432/lesson11
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
     initialization-mode: always
 
   jpa:
