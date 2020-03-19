@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/static/css/styles.css} "/>
+</head>
+<body>
+<div th:insert="header :: div"/>
+<div class="container">
+    <a th:href="@{/products/addNew}" th:text="#{products.addNew}">Add new product</a>
+    <form th:action="@{/orders/addToOrder}" method="post">
+        <div class="card-deck product-list">
+            <div th:each="product, iter : ${products}" class="card col-4 p-0">
+                <img src="https://via.placeholder.com/372x252" class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a th:href="@{/products/__${product.id}__}" th:text="${product.name}">link</a>
+                    </h5>
+                </div>
+                <div class="card-footer">
+                    <input th:id="'addToOrder' + ${iter.index}" type="checkbox" name="productId"
+                           th:value="${product.id}"/>
+                    <label th:for="'addToOrder' + ${iter.index}" th:text="#{products.addToOrder}">Add to
+                        order</label>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="orderId" th:value="${orderId}"/>
+        <input type="submit" th:value="#{products.saveOrder}"/>
+    </form>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
