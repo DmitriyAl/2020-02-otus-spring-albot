@@ -10,6 +10,7 @@ import otus.spring.albot.lesson11.entity.Author;
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.entity.Genre;
 import otus.spring.albot.lesson11.exception.NoSuchAuthorException;
+import otus.spring.albot.lesson11.exception.NoSuchBookException;
 import otus.spring.albot.lesson11.exception.NoSuchGenreException;
 
 import java.util.ArrayList;
@@ -70,7 +71,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void removeBookById(long id) {
-        bookRepo.deleteById(id);
+    public void removeBookById(long id) throws NoSuchBookException {
+        Book book = bookRepo.findById(id)
+                .orElseThrow(() -> new NoSuchBookException("The book with id: " + id + " does not exist"));
+        bookRepo.delete(book);
     }
 }

@@ -1,6 +1,6 @@
 package otus.spring.albot.lesson11.business;
 
-import otus.spring.albot.lesson11.entity.Book;
+import otus.spring.albot.lesson11.entity.Note;
 
 /**
  * <pre>
@@ -13,7 +13,7 @@ import otus.spring.albot.lesson11.entity.Book;
  * @author Dmitrii Albot
  */
 public interface NoteService {
-    Book addNoteToBook(long bookId, String note);
+    Note addNoteToBook(long bookId, String note);
 
     void removeNote(long id);
 }

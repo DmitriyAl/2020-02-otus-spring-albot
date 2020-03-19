@@ -3,6 +3,12 @@ package otus.spring.albot.lesson11.dao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import otus.spring.albot.lesson11.entity.Book;
+import otus.spring.albot.lesson11.entity.Note;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * <pre>
@@ -23,9 +29,8 @@ public class NoteRepoTest {
 
     @Test
     public void findByBook() {
-//        Optional<Book> bookOptional = bookRepo.findById(1L);
-//        Book book = bookOptional.orElse(null);
-//        List<Comment> comments = commentRepo.findByBook(book);
-//        assertThat(comments).allMatch(c-> c.getBook().equals(book));
+        Book book = bookRepo.findById(1L).orElseThrow(NullPointerException::new);
+        List<Note> comments = noteRepo.findByBook(book);
+        assertThat(comments).allMatch(c-> c.getBook().equals(book));
     }
 }

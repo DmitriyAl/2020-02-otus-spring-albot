@@ -2,6 +2,7 @@ package otus.spring.albot.lesson11.business;
 
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.exception.NoSuchAuthorException;
+import otus.spring.albot.lesson11.exception.NoSuchBookException;
 import otus.spring.albot.lesson11.exception.NoSuchGenreException;
 
 import java.util.List;
@@ -27,5 +28,5 @@ public interface BookService {
 
     Book addNewBook(String name, long authorId, long genreId) throws NoSuchAuthorException, NoSuchGenreException;
 
-    void removeBookById(long id);
+    void removeBookById(long id) throws NoSuchBookException;
 }

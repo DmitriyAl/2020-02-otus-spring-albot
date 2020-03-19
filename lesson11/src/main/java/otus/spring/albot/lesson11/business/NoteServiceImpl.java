@@ -8,8 +8,6 @@ import otus.spring.albot.lesson11.dao.NoteRepo;
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.entity.Note;
 
-import java.util.Optional;
-
 /**
  * <pre>
  * $Id: $
@@ -28,15 +26,12 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     @Transactional
-    public Book addNoteToBook(long bookId, String textNote) {
-        Optional<Book> bookOptional = bookRepo.findById(bookId);
-        if (!bookOptional.isPresent()) {
+    public Note addNoteToBook(long bookId, String textNote) {
+        Book book = bookRepo.findById(bookId).orElse(null);
+        if (book == null) {
             return null;
         }
-        Book book = bookOptional.get();
-        Note note = new Note();
-        note.setNote(textNote);
-        return bookRepo.saveAndFlush(book);
+        return noteRepo.save(new Note(textNote, book));
     }
 
     @Override

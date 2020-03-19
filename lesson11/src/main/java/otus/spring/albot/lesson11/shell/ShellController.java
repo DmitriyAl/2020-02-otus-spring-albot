@@ -8,7 +8,9 @@ import otus.spring.albot.lesson11.business.*;
 import otus.spring.albot.lesson11.entity.Author;
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.entity.Genre;
+import otus.spring.albot.lesson11.entity.Note;
 import otus.spring.albot.lesson11.exception.NoSuchAuthorException;
+import otus.spring.albot.lesson11.exception.NoSuchBookException;
 import otus.spring.albot.lesson11.exception.NoSuchGenreException;
 import otus.spring.albot.lesson11.model.BookNotes;
 
@@ -38,9 +40,9 @@ public class ShellController {
         return authorService.findAllAuthors();
     }
 
-    @ShellMethod(value = "Get authors matching template", key = {"get-authors-by-template", "gat"})
-    public Author getAuthorsByTemplate(@ShellOption(defaultValue = "") String template) {
-        return authorService.findByName(template);
+    @ShellMethod(value = "Get author with name. Parameters: 'authorName'", key = {"get-authors-by-name", "gan"})
+    public Author getAuthorsByName(@ShellOption(defaultValue = "") String authorName) {
+        return authorService.findByName(authorName);
     }
 
     @ShellMethod(value = "Add a new author. Parameters: 'name'.", key = {"add-new-author", "ana"})
@@ -74,12 +76,12 @@ public class ShellController {
         return bookService.findAllBooksByAuthorId(authorId);
     }
 
-    @ShellMethod(value = "Get books matching template", key = {"get-books-by-template", "gbt"})
-    public Book getBooksByTemplate(@ShellOption(defaultValue = "") String template) {
-        return bookService.findByName(template);
+    @ShellMethod(value = "Get book with name. Parameters: 'bookName'.", key = {"get-books-by-name", "gbn"})
+    public Book getBooksByName(@ShellOption(defaultValue = "") String bookName) {
+        return bookService.findByName(bookName);
     }
 
-    @ShellMethod(value = "Get book by id", key = {"get-book-by-id", "gbbi"})
+    @ShellMethod(value = "Get book by id. Parameters: 'id'.", key = {"get-book-by-id", "gbbi"})
     public Book getBookById(@ShellOption long id) {
         return bookService.findById(id);
     }
@@ -96,7 +98,11 @@ public class ShellController {
 
     @ShellMethod(value = "Remove the book. Parameters: 'id'.", key = {"delete-book", "db"})
     public String deleteBook(long id) {
-        bookService.removeBookById(id);
+        try {
+            bookService.removeBookById(id);
+        } catch (NoSuchBookException e) {
+            return e.getMessage();
+        }
         return "The book was removed";
     }
 
@@ -105,9 +111,9 @@ public class ShellController {
         return genreService.findAllGenres();
     }
 
-    @ShellMethod(value = "Get gentes matching template", key = {"get-genres-by-template", "ggt"})
-    public Genre getGenresByTemplate(@ShellOption(defaultValue = "") String template) {
-        return genreService.findByName(template);
+    @ShellMethod(value = "Get genre with name. Parameters: 'genreName'.", key = {"get-genres-by-name", "ggn"})
+    public Genre getGenresByName(@ShellOption(defaultValue = "") String genreName) {
+        return genreService.findByName(genreName);
     }
 
     @ShellMethod(value = "Add a new genre. Parameters: 'name'.", key = {"add-new-genre", "ang"})
@@ -122,19 +128,19 @@ public class ShellController {
         return status ? "The genre was removed" : "The genre was not removed. Probably you have the books depended from this genre";
     }
 
-    @ShellMethod(value = "Get all comments for the book by template", key = {
-            "get-all-comments-for-the-book-by-template", "gacbbt"})
-    public BookNotes getAllCommentsForBookByTemplate(@ShellOption(defaultValue = "") String template) {
-        return bookCommentPreparer.extractAllNotesForBookByName(template);
+    @ShellMethod(value = "Get all comments for the book by name. Parameters: 'bookName'.", key = {
+            "get-all-comments-for-the-book-by-name", "gacbbn"})
+    public BookNotes getAllCommentsForBookByName(@ShellOption(defaultValue = "") String bookName) {
+        return bookCommentPreparer.extractAllNotesForBookByName(bookName);
     }
 
-    @ShellMethod(value = "Get all comments for the book by id", key = {"get-all-comments-for-the-book-by-id", "gacbbi"})
+    @ShellMethod(value = "Get all comments for the book by id. Parameters: 'id'.", key = {"get-all-comments-for-the-book-by-id", "gacbbi"})
     public BookNotes getAllCommentsForBookById(@ShellOption long id) {
         return bookCommentPreparer.extractAllNotesForBookById(id);
     }
 
-    @ShellMethod(value = "Add comment to the book with id", key = {"bac", "book-add-comment"})
-    public Book addCommentToBook(@ShellOption long id, @ShellOption String comment) {
+    @ShellMethod(value = "Add comment to the book with id. Parameters: 'id' 'comment'.", key = {"bac", "book-add-comment"})
+    public Note addCommentToBook(@ShellOption long id, @ShellOption String comment) {
         return noteService.addNoteToBook(id, comment);
     }
 

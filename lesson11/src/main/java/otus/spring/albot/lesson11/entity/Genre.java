@@ -1,6 +1,7 @@
 package otus.spring.albot.lesson11.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "genres")
+@EqualsAndHashCode(exclude = "id")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
