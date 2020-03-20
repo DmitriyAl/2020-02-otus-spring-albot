@@ -9,9 +9,7 @@ import otus.spring.albot.lesson11.entity.Author;
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.entity.Genre;
 import otus.spring.albot.lesson11.entity.Note;
-import otus.spring.albot.lesson11.exception.NoSuchAuthorException;
-import otus.spring.albot.lesson11.exception.NoSuchBookException;
-import otus.spring.albot.lesson11.exception.NoSuchGenreException;
+import otus.spring.albot.lesson11.exception.*;
 import otus.spring.albot.lesson11.model.BookNotes;
 
 import java.util.List;
@@ -124,8 +122,12 @@ public class ShellController {
 
     @ShellMethod(value = "Remove the genre. Parameters: 'id'.", key = {"delete-genre", "dg"})
     public String deleteGenre(@ShellOption long id) {
-        boolean status = genreService.removeGenreById(id);
-        return status ? "The genre was removed" : "The genre was not removed. Probably you have the books depended from this genre";
+        try {
+            genreService.removeGenreById(id);
+        } catch (NoSuchGenreException| DependentBookException e) {
+            return e.getMessage();
+        }
+        return "The genre was removed";
     }
 
     @ShellMethod(value = "Get all comments for the book by name. Parameters: 'bookName'.", key = {
@@ -146,7 +148,11 @@ public class ShellController {
 
     @ShellMethod(value = "Remove comment for the book by comment id. Parameters: 'id'.", key = {"remove-comment-id", "rci"})
     public String removeCommentFromBookById(@ShellOption long id) {
-        noteService.removeNote(id);
+        try {
+            noteService.removeNote(id);
+        } catch (NoSuchNoteException e) {
+            return e.getMessage();
+        }
         return "The comment was removed";
     }
 }

@@ -1,6 +1,7 @@
 package otus.spring.albot.lesson11.business;
 
 import otus.spring.albot.lesson11.entity.Note;
+import otus.spring.albot.lesson11.exception.NoSuchNoteException;
 
 /**
  * <pre>
@@ -15,5 +16,5 @@ import otus.spring.albot.lesson11.entity.Note;
 public interface NoteService {
     Note addNoteToBook(long bookId, String note);
 
-    void removeNote(long id);
+    void removeNote(long id) throws NoSuchNoteException;
 }

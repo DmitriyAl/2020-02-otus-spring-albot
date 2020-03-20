@@ -7,6 +7,7 @@ import otus.spring.albot.lesson11.dao.BookRepo;
 import otus.spring.albot.lesson11.dao.NoteRepo;
 import otus.spring.albot.lesson11.entity.Book;
 import otus.spring.albot.lesson11.entity.Note;
+import otus.spring.albot.lesson11.exception.NoSuchNoteException;
 
 /**
  * <pre>
@@ -36,7 +37,8 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     @Transactional
-    public void removeNote(long id) {
-        noteRepo.deleteById(id);
+    public void removeNote(long id) throws NoSuchNoteException {
+        Note note = noteRepo.findById(id).orElseThrow(() -> new NoSuchNoteException(id));
+        noteRepo.delete(note);
     }
 }

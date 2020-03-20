@@ -1,6 +1,8 @@
 package otus.spring.albot.lesson11.business;
 
 import otus.spring.albot.lesson11.entity.Genre;
+import otus.spring.albot.lesson11.exception.DependentBookException;
+import otus.spring.albot.lesson11.exception.NoSuchGenreException;
 
 import java.util.List;
 
@@ -21,5 +23,5 @@ public interface GenreService {
 
     Genre addNewGenre(String name);
 
-    boolean removeGenreById(long id);
+    void removeGenreById(long id) throws NoSuchGenreException, DependentBookException;
 }
