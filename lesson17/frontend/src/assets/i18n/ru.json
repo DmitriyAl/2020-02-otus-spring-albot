@@ -1,4 +1,8 @@
 {
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  },
   "orders": {
     "orders": "Заказы",
     "order": "Заказ",
@@ -8,5 +12,9 @@
     "createNewOrder": "Создать новый заказ",
     "cancel": "Отмена",
     "submit": "Сохранить новый заказ"
+  },
+  "product": {
+    "editDescription": "Изменить описание",
+    "addComment": "Добавить комментарий"
   }
 }

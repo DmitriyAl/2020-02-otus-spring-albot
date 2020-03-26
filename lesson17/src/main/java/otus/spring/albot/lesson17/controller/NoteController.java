@@ -2,9 +2,7 @@ package otus.spring.albot.lesson17.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import otus.spring.albot.lesson17.dto.NoteDto;
 import otus.spring.albot.lesson17.exception.NoSuchProductException;
@@ -24,5 +22,15 @@ public class NoteController {
         } catch (NoSuchProductException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getCode().getCode());
         }
+    }
+
+    @PostMapping(value = "notes")
+    public NoteDto addNote(@RequestBody NoteDto noteDto) {
+        return noteService.addNote(noteDto);
+    }
+
+    @DeleteMapping(value = "notes")
+    public void removeNote(@RequestParam("id") long id) {
+        noteService.removeNote(id);
     }
 }

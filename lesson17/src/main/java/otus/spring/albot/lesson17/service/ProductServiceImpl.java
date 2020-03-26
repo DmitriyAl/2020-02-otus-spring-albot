@@ -32,6 +32,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void removeProduct(long id) throws ClientException {
         Product product = productRepo.findById(id).orElseThrow(() -> new NoSuchProductException(id));
         if (product.getOrders().size() != 0) {
@@ -39,5 +40,11 @@ public class ProductServiceImpl implements ProductService {
                     .collect(Collectors.toList()).toArray());
         }
         productRepo.delete(product);
+    }
+
+    @Override
+    @Transactional
+    public ProductDto updateProduct(ProductDto product) {
+        return ProductDto.fromDao(productRepo.save(ProductDto.toDao(product)));
     }
 }

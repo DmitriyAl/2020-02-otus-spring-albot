@@ -31,6 +31,11 @@ public class ProductController {
         }
     }
 
+    @PutMapping(value = "products")
+    public ProductDto updateProduct(@RequestBody ProductDto product) {
+        return productService.updateProduct(product);
+    }
+
     @DeleteMapping(value = "products")
     public void removeProduct(@RequestParam("id") long id) {
         try {

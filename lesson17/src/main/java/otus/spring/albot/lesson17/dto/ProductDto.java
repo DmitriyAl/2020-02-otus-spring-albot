@@ -19,4 +19,12 @@ public class ProductDto {
         dto.description = product.getDescription();
         return dto;
     }
+
+    public static Product toDao(ProductDto dto) {
+        Product product = new Product();
+        product.setId(dto.id);
+        product.setName(dto.name);
+        product.setDescription(dto.description);
+        return product;
+    }
 }

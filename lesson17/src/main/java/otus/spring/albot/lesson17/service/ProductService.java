@@ -12,4 +12,6 @@ public interface ProductService {
     ProductDto getProductById(long id) throws NoSuchProductException;
 
     void removeProduct(long id) throws ClientException;
+
+    ProductDto updateProduct(ProductDto product);
 }
