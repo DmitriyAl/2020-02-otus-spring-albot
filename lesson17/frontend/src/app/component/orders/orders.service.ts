@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {OrderDto} from "../../dto/orderDto";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {api} from "../../utils/api";
 import {Observable} from "rxjs";
-import {ProductDto} from "../../dto/productDto";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,8 @@ export class OrdersService {
     return this.http.get<OrderDto[]>(api.orders)
   }
 
-  public getProductsForOrder(id: number): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(api.orders + `/${id}`)
+  public getOrder(id: number): Observable<OrderDto> {
+    return this.http.get<OrderDto>(api.orders + `/${id}`)
   }
 
   public removeOrder(id: number): Observable<void> {

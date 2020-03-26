@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-md-3">
     {{'orders.orders' | translate}}
-    <app-orders (productsUpdated)="updateProducts($event)" class="col-md-3"></app-orders>
+    <app-orders (orderSelected)="updateOrder($event)" class="col-md-3"></app-orders>
   </div>
   <div class="col-md-9">
-    <h2 *ngIf="!products">{{'orders.noSelected' | translate}}</h2>
-    <app-products-list *ngIf="products" [products]="products" class="col-md-9"></app-products-list>
+    <h2 *ngIf="!order">{{'orders.noSelected' | translate}}</h2>
+    <app-products-list *ngIf="order" [products]="order.products" class="col-md-9"></app-products-list>
   </div>
 </div>

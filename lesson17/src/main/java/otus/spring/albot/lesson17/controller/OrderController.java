@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import otus.spring.albot.lesson17.dto.OrderDto;
-import otus.spring.albot.lesson17.dto.ProductDto;
 import otus.spring.albot.lesson17.exception.NoSuchOrderException;
 import otus.spring.albot.lesson17.service.OrderService;
 
@@ -22,9 +21,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "orders/{id}")
-    public List<ProductDto> getProductsByOrderId(@PathVariable("id") Long id) {
+    public OrderDto getProductsByOrderId(@PathVariable("id") Long id) {
         try {
-            return orderService.productsByOrderId(id);
+            return orderService.getOrderById(id);
         } catch (NoSuchOrderException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getCode().getCode());
         }

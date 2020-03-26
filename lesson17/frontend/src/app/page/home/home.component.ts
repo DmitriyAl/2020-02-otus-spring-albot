@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Product} from "../../model/product";
+import {Order} from "../../model/order";
 
 @Component({
   selector: 'app-home',
@@ -7,14 +7,14 @@ import {Product} from "../../model/product";
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-  products: Product[];
+  order: Order;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  updateProducts(products: Product[]) {
-    this.products = products;
+  updateOrder(order: Order) {
+    this.order = order;
   }
 }

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {OrderDto} from "../../dto/orderDto";
 import {OrdersService} from "./orders.service";
-import {Product} from "../../model/product";
+import {Order} from "../../model/order";
 
 @Component({
   selector: 'app-orders',
@@ -9,9 +8,9 @@ import {Product} from "../../model/product";
   styleUrls: ['./orders.component.less']
 })
 export class OrdersComponent implements OnInit {
-  orders: OrderDto[];
-  selectedOrder: OrderDto;
-  @Output() productsUpdated: EventEmitter<Product[]> = new EventEmitter<Product[]>();
+  orders: Order[];
+  selectedOrder: Order;
+  @Output() orderSelected: EventEmitter<Order> = new EventEmitter<Order>();
 
   constructor(private service: OrdersService) {
   }
@@ -21,27 +20,28 @@ export class OrdersComponent implements OnInit {
   }
 
   private updateOrders() {
-    this.service.getOrders().subscribe(orders => this.orders = orders)
+    this.service.getOrders().subscribe(orders => this.orders = orders.map(o => new Order(o)))
   }
 
-  updateProducts(order: OrderDto): void {
-    this.service.getProductsForOrder(order.id).subscribe(products => {
-      this.selectedOrder = order;
-      this.productsUpdated.emit(products.map(p => new Product(p)));
+  updateOrder(order: Order): void {
+    this.service.getOrder(order.orderDto.id).subscribe(orderDto => {
+      this.selectedOrder = new Order(orderDto);
+      this.orderSelected.emit(this.selectedOrder);
     }, error => {
-      console.log(error)
+      console.log(error);
+      this.updateOrders();
     });
   }
 
-  isSelected(order: OrderDto): boolean {
-    return this.selectedOrder == order;
+  isSelected(order: Order): boolean {
+    return this.selectedOrder != null && this.selectedOrder.orderDto.id == order.orderDto.id;
   }
 
-  removeOrder(event: MouseEvent, order: OrderDto): void {
+  removeOrder(event: MouseEvent, order: Order): void {
     event.stopPropagation();
-    this.service.removeOrder(order.id).subscribe(() => {
+    this.service.removeOrder(order.orderDto.id).subscribe(() => {
       this.updateOrders();
-      this.selectedOrder = null;
+      this.orderSelected.emit(null);
     }, error => console.log(error));
   }
 }
