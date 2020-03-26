@@ -4,10 +4,22 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {HomeComponent} from './main-layout/home.component';
-import {OrdersComponent} from './orders/orders.component';
-import {ProductsComponent} from './products/products.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HomeComponent} from './page/home/home.component';
+import {OrdersComponent} from './component/orders/orders.component';
+import {ProductsListComponent} from './component/products-list/products-list.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {ProductCardComponent} from './component/product-card/product-card.component';
+import {ProductComponent} from './page/product/product.component';
+import {ProductsComponent} from './page/products/products.component';
+import {NotifierModule} from "angular-notifier";
+import {notifierOptions} from "./utils/notifier-options";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -15,15 +27,31 @@ import {HttpClientModule} from "@angular/common/http";
     HeaderComponent,
     HomeComponent,
     OrdersComponent,
+    ProductsListComponent,
+    ProductCardComponent,
+    ProductComponent,
     ProductsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+        defaultLanguage: 'ru',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }
+    ),
+    NotifierModule.withConfig(notifierOptions),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

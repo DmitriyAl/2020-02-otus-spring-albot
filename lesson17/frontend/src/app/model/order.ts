@@ -1,6 +1,9 @@
-import {Product} from "./product";
+import {OrderDto} from "../dto/orderDto";
 
-export class Order{
-  public id:number;
-  public products: Product[];
+export class Order {
+  orderDto: OrderDto;
+
+  constructor(dto: OrderDto) {
+    this.orderDto = dto;
+  }
 }

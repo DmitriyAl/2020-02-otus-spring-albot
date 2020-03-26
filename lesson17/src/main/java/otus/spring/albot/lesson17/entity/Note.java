@@ -1,6 +1,7 @@
 package otus.spring.albot.lesson17.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "notes")
 @Data
+@NoArgsConstructor
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +17,7 @@ public class Note {
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String comment;
-    @ManyToOne(targetEntity = Product.class)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
     @Column(name = "rate")

@@ -1,26 +1,44 @@
 package otus.spring.albot.lesson17.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import otus.spring.albot.lesson17.dto.ProductDto;
+import otus.spring.albot.lesson17.exception.ClientException;
+import otus.spring.albot.lesson17.exception.DependentOrdersExistException;
+import otus.spring.albot.lesson17.exception.NoSuchProductException;
 import otus.spring.albot.lesson17.service.ProductService;
 
-@Controller
+import java.util.List;
+
+@RestController
 @AllArgsConstructor
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
 
     @GetMapping(value = "products")
-    public String productList(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        return "pages/products";
+    public List<ProductDto> getProducts() {
+        return productService.getAllProducts();
     }
 
     @GetMapping(value = "products/{id}")
-    public String product(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "pages/product";
+    public ProductDto product(@PathVariable("id") Long id) {
+        try {
+            return productService.getProductById(id);
+        } catch (NoSuchProductException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getCode().getCode());
+        }
+    }
+
+    @DeleteMapping(value = "products")
+    public void removeProduct(@RequestParam("id") long id) {
+        try {
+            productService.removeProduct(id);
+        } catch (DependentOrdersExistException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getCode().getCode());
+        } catch (ClientException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getCode().getCode());
+        }
     }
 }

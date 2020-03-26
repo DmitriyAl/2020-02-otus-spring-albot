@@ -1,0 +1,15 @@
+<div *ngIf="product">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="https://via.placeholder.com/445x268" alt="Card image cap">
+    </div>
+    <div class="col-md-7">
+      <p>{{product.description}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <ul>
+      <li *ngFor="let note of notes">{{note.comment}}</li>
+    </ul>
+  </div>
+</div>

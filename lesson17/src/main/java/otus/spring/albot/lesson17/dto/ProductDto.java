@@ -7,6 +7,7 @@ import otus.spring.albot.lesson17.entity.Product;
 public class ProductDto {
     private long id;
     private String name;
+    private String description;
 
     public static ProductDto fromDao(Product product) {
         if (product == null) {
@@ -15,6 +16,7 @@ public class ProductDto {
         ProductDto dto = new ProductDto();
         dto.id = product.getId();
         dto.name = product.getName();
+        dto.description = product.getDescription();
         return dto;
     }
 }

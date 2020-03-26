@@ -5,10 +5,11 @@ drop table if exists products;
 
 create table if not exists products
 (
-    id   bigserial not null
+    id          bigserial not null
         constraint products_pkey
             primary key,
-    name varchar(255)
+    name        varchar(255),
+    description text
 );
 
 create table if not exists orders

@@ -1,6 +1,10 @@
-import {Note} from "./note";
+import {ProductDto} from "../dto/productDto";
 
 export class Product {
-  public id: number;
-  public notes: Note[];
+  productDto: ProductDto;
+  selected: boolean = true;
+
+  constructor(dto: ProductDto) {
+    this.productDto = dto;
+  }
 }
