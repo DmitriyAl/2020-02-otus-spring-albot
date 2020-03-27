@@ -24,7 +24,7 @@ export class OrdersService {
     return this.http.delete<void>(api.orders, {params: params})
   }
 
-  public createNewOrder(productIds: number[]): Observable<OrderDto> {
-    return this.http.post<OrderDto>(api.orders, productIds)
+  public createNewOrder(orderDto: OrderDto): Observable<OrderDto> {
+    return this.http.post<OrderDto>(api.orders, orderDto)
   }
 }

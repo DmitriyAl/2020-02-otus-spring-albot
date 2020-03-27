@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Order} from "../../model/order";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,16 @@ import {Order} from "../../model/order";
 export class HomeComponent implements OnInit {
   order: Order;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   updateOrder(order: Order) {
     this.order = order;
+  }
+
+  changeOrder() {
+    this.router.navigate(["/products"],{queryParams: {'id': this.order.orderDto.id}})
   }
 }

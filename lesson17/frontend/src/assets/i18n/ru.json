@@ -6,15 +6,17 @@
   "orders": {
     "orders": "Заказы",
     "order": "Заказ",
-    "noSelected": "Выберите интересующий Вас заказ"
+    "noSelected": "Выберите интересующий Вас заказ",
+    "changeOrder": "Редактировать заказ"
   },
   "products": {
-    "createNewOrder": "Создать новый заказ",
+    "saveOrder": "Сохранить заказ",
     "cancel": "Отмена",
-    "submit": "Сохранить новый заказ"
+    "submit": "Сохранить новый заказ",
+    "addProduct": "Создать продукт"
   },
   "product": {
-    "editDescription": "Изменить описание",
+    "editProduct": "Изменить описание",
     "addComment": "Добавить комментарий"
   }
 }

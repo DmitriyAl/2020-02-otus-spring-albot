@@ -20,4 +20,11 @@ public class OrderDto {
         dto.products = order.getProducts().stream().map(ProductDto::fromDao).collect(Collectors.toList());
         return dto;
     }
+
+    public static Order toDao(OrderDto orderDto) {
+        Order order = new Order();
+        order.setId(orderDto.id);
+        order.setProducts(orderDto.products.stream().map(ProductDto::toDao).collect(Collectors.toList()));
+        return order;
+    }
 }

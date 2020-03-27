@@ -1,6 +1,8 @@
 <div class="row">
   <button *ngIf="!editMode" class="btn btn-primary"
-          (click)="newOrderMode(true)">{{'products.createNewOrder'|translate}}</button>
+          (click)="newOrderMode(true)">{{'products.saveOrder'|translate}}</button>
+  <button *ngIf="!editMode" class="btn btn-primary"
+          (click)="addNewProduct()">{{'products.addProduct'|translate}}</button>
   <button *ngIf="editMode" class="btn btn-danger"
           (click)="newOrderMode(false)">{{'products.cancel'|translate}}</button>
   <button *ngIf="editMode" class="btn btn-success" (click)="createOrder()">{{'products.submit'|translate}}</button>

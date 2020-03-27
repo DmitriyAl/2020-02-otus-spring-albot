@@ -4,17 +4,19 @@
       <img src="https://via.placeholder.com/445x268" alt="Card image cap">
     </div>
     <div class="col-md-7">
+      <h2 *ngIf="!editMode">{{product.productDto.name}}</h2>
       <p *ngIf="!editMode">{{product.productDto.description}}</p>
+      <input *ngIf="editMode" [(ngModel)]="product.productDto.name">
       <textarea *ngIf="editMode" rows="5" [(ngModel)]="product.productDto.description"></textarea>
       <button *ngIf="!editMode" (click)="switchToEditMode(true)"
-              class="btn btn-primary">{{'product.editDescription'|translate}}</button>
+              class="btn btn-primary">{{'product.editProduct'|translate}}</button>
       <button *ngIf="editMode" (click)="switchToEditMode(false)"
               class="btn btn-danger">{{'common.cancel'|translate}}</button>
-      <button *ngIf="editMode" (click)="updateDescription()"
+      <button *ngIf="editMode" (click)="updateProduct()"
               class="btn btn-success">{{'common.save'|translate}}</button>
     </div>
   </div>
-  <div class="row">
+  <div *ngIf="!newProductMode" class="row">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let note of notes">
         <span>{{note.noteDto.comment}}</span>

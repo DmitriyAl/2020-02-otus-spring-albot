@@ -30,8 +30,8 @@ public class OrderController {
     }
 
     @PostMapping(value = "orders")
-    public OrderDto createNewOrder(@RequestBody List<Long> productIds) {
-        return orderService.createNewOrder(productIds);
+    public OrderDto createNewOrder(@RequestBody OrderDto orderDto) {
+        return orderService.createNewOrder(orderDto);
     }
 
     @DeleteMapping(value = "orders")

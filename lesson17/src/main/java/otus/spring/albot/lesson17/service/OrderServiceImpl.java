@@ -33,13 +33,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public List<ProductDto> productsByOrderId(long id) throws NoSuchOrderException {
-        OrderDto orderDto = OrderDto.fromDao(orderRepo.findById(id).orElseThrow(() -> new NoSuchOrderException(id)));
-        return orderDto.getProducts();
-    }
-
-    @Override
-    @Transactional
     public void removeOrder(long id) throws NoSuchOrderException {
         Order order = orderRepo.findById(id).orElseThrow(() -> new NoSuchOrderException(id));
         orderRepo.delete(order);
@@ -47,9 +40,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto createNewOrder(List<Long> productIds) {
-        List<Product> products = productRepo.findAllById(productIds);
-        Order order = orderRepo.save(new Order(products));
-        return OrderDto.fromDao(order);
+    public OrderDto createNewOrder(OrderDto orderDto) {
+        return OrderDto.fromDao(orderRepo.save(OrderDto.toDao(orderDto)));
     }
 }

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "./product.service";
 import {Note} from "../../model/note";
 import {Product} from "../../model/product";
@@ -13,21 +13,39 @@ import {NoteDto} from "../../dto/noteDto";
   styleUrls: ['./product.component.less']
 })
 export class ProductComponent implements OnInit {
-  @Input() editMode: boolean = false;
+  editMode: boolean = false;
+  newProductMode: boolean = false;
   product: Product;
   notes: Note[];
   form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private service: ProductService, private fb: FormBuilder, private noteService: NoteService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private service: ProductService, private fb: FormBuilder, private noteService: NoteService) {
     this.form = this.fb.group({
       comment: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.getProduct(id);
-    this.getNotes(id);
+    const strId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (isNaN(+strId) && strId === 'new') {
+      this.initNewProduct();
+    } else if (!isNaN(+strId)) {
+      this.loadProductFromDB(strId);
+    } else {
+      this.goToProducts();
+    }
+  }
+
+  private initNewProduct() {
+    this.product = new Product();
+    this.notes = [];
+    this.newProductMode = true;
+    this.editMode = true;
+  }
+
+  private loadProductFromDB(strId: string) {
+    this.getProduct(+strId);
+    this.getNotes(+strId);
   }
 
   private getProduct(id: number) {
@@ -42,14 +60,24 @@ export class ProductComponent implements OnInit {
 
   switchToEditMode(editMode: boolean) {
     this.editMode = editMode;
+    if (this.newProductMode && !editMode) {
+      this.goToProducts();
+    }
   }
 
-  updateDescription() {
+  updateProduct() {
     this.service.updateProduct(this.product.productDto)
       .subscribe(p => {
         this.product = new Product(p);
         this.editMode = false;
+        if (this.newProductMode) {
+          this.goToProducts();
+        }
       }, error => console.log(error));
+  }
+
+  private goToProducts() {
+    this.router.navigate(["/products"])
   }
 
   submit(value: any) {

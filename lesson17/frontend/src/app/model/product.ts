@@ -4,7 +4,11 @@ export class Product {
   productDto: ProductDto;
   selected: boolean = false;
 
-  constructor(dto: ProductDto) {
-    this.productDto = dto;
+  constructor(dto?: ProductDto) {
+    if (dto) {
+      this.productDto = dto;
+    } else {
+      this.productDto = new ProductDto();
+    }
   }
 }
