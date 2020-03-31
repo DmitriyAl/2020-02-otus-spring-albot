@@ -1,5 +1,6 @@
 package otus.spring.albot.lesson17.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "notes")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
