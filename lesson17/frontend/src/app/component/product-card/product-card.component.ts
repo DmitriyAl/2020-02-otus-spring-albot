@@ -26,7 +26,8 @@ export class ProductCardComponent implements OnInit {
       this.cardRemoved.emit(this.product);
     }, error => {
       const responseError = error as HttpErrorResponse;
-      this.notifier.notify('error', responseError.message)
+      var ids = responseError.error.message;
+      this.notifier.notify('error', 'Заказы ' + ids + ' содержат данный продукт')
     })
   }
 }

@@ -63,9 +63,13 @@ export class ProductsComponent implements OnInit {
         order.products.push(p.productDto)
       }
     });
-    this.ordersService.createNewOrder(order).subscribe(order => {
-      this.notifier.notify('success', order.id.toString());
-      this.router.navigate([''])
+    this.ordersService.createNewOrder(order).subscribe(o => {
+      if (order.id) {
+        this.notifier.notify('success', 'Ордер №' + o.id.toString() + ' был изменен');
+      } else {
+        this.notifier.notify('success', 'Был создан новый ордер №' + o.id.toString());
+      }
+      this.router.navigate(['']);
     });
   }
 

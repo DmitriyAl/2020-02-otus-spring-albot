@@ -41,7 +41,7 @@ public class ProductController {
         try {
             productService.removeProduct(id);
         } catch (DependentOrdersExistException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getCode().getCode());
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getParams().toString());
         } catch (ClientException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getCode().getCode());
         }

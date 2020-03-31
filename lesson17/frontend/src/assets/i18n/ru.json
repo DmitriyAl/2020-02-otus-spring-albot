@@ -10,10 +10,11 @@
     "changeOrder": "Редактировать заказ"
   },
   "products": {
-    "saveOrder": "Сохранить заказ",
+    "createNewOrder": "Сохранить новый заказ",
     "cancel": "Отмена",
-    "submit": "Сохранить новый заказ",
-    "addProduct": "Создать продукт"
+    "saveOrder": "Сохранить заказ",
+    "addProduct": "Создать продукт",
+    "orderCreated": "Создан заказ с номером "
   },
   "product": {
     "editProduct": "Изменить описание",
