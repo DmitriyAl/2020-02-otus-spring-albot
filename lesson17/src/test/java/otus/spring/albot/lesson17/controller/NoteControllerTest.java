@@ -16,8 +16,8 @@ import otus.spring.albot.lesson17.service.NoteService;
 import java.util.Collections;
 import java.util.List;
 
-import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
