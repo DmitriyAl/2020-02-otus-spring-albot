@@ -12,10 +12,8 @@ import otus.spring.albot.lesson13.dao.NoteRepo;
 import otus.spring.albot.lesson13.entity.Author;
 import otus.spring.albot.lesson13.entity.Book;
 import otus.spring.albot.lesson13.entity.Genre;
-import otus.spring.albot.lesson13.entity.Note;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -57,12 +55,22 @@ public class BookRepoListener extends AbstractMongoEventListener<Book> {
     public void onBeforeDelete(BeforeDeleteEvent<Book> event) {
         super.onBeforeDelete(event);
         String id = event.getSource().get("_id").toString();
-        List<Note> notes = new ArrayList<>();
-        bookRepo.findById(id).ifPresent(b -> {
-            if (b.getNotes() != null) {
-                notes.addAll(b.getNotes());
+        bookRepo.findById(id).ifPresent(book -> {
+            if (book.getNotes() != null) {
+                noteRepo.deleteAll(book.getNotes());
             }
+            genreRepo.findById(book.getGenre().getId()).ifPresent(genre -> {
+                if (genre.getBooks() != null) {
+                    genre.getBooks().remove(book);
+                    genreRepo.save(genre);
+                }
+            });
+            authorRepo.findById(book.getAuthor().getId()).ifPresent(author -> {
+                if (author.getBooks() != null) {
+                    author.getBooks().remove(book);
+                    authorRepo.save(author);
+                }
+            });
         });
-        noteRepo.deleteAll(notes);
     }
 }
