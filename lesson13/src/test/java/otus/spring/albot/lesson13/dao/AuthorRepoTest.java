@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.annotation.DirtiesContext;
 import otus.spring.albot.lesson13.entity.Author;
 import otus.spring.albot.lesson13.entity.Book;
 import otus.spring.albot.lesson13.entity.Genre;
@@ -11,6 +12,7 @@ import otus.spring.albot.lesson13.entity.Genre;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @ComponentScan("otus.spring.albot.lesson13.listener")
 class AuthorRepoTest {
     @Autowired
