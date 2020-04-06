@@ -1,0 +1,14 @@
+<div class="row">
+  <button *ngIf="!editMode" class="btn btn-primary"
+          (click)="newOrderMode(true)">{{'products.createNewOrder'|translate}}</button>
+  <button *ngIf="!editMode" class="btn btn-primary"
+          (click)="addNewProduct()">{{'products.addProduct'|translate}}</button>
+  <button *ngIf="editMode" class="btn btn-danger"
+          (click)="newOrderMode(false)">{{'products.cancel'|translate}}</button>
+  <button *ngIf="editMode" class="btn btn-success" (click)="createOrder()">{{'products.saveOrder'|translate}}</button>
+</div>
+<div class="row">
+  <app-products-list [products]="products" [removable]="true" [selectable]="editMode"
+                     (updateList)="updateProducts()">
+  </app-products-list>
+</div>
