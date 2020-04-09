@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -24,12 +25,14 @@
             </ul>
         </div>
         <div class="form-inline">
-            <label for="langBox"  class="text-secondary" th:text="#{header.language}">Lang</label>
+            <label for="langBox" class="text-secondary" th:text="#{header.language}">Lang</label>
             <select id="langBox" name="lang">
                 <option value=""></option>
                 <option value="en">EN</option>
                 <option value="ru_RU">RU</option>
             </select>
+            <a th:href="@{/perform-logout}" class="btn btn-danger" th:text="#{header.logout}"
+               sec:authorize="isAuthenticated()">Logout</a>
         </div>
     </nav>
     <script th:src="@{/js/header.js}"></script>
