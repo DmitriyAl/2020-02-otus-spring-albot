@@ -17,7 +17,7 @@ public class ProductController {
     private ProductService productService;
     private NoteService noteService;
 
-    @GetMapping(value = "products")
+    @GetMapping(value = {"", "products"})
     public String productList(Model model) {
         model.addAttribute("products", productService.getAllProducts());
         return "products";
@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "products/addNote")
-    public String addNote(@RequestParam("productId")Long productId, @RequestParam("comment") String comment, Model model) {
+    public String addNote(@RequestParam("productId") Long productId, @RequestParam("comment") String comment, Model model) {
         productService.addComment(productId, comment);
         return String.format("redirect:/products/%d", productId);
     }

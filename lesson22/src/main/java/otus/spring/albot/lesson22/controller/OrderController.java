@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderController {
     private OrderService orderService;
 
-    @GetMapping(value = {"", "orders"})
+    @GetMapping(value = "orders")
     public String welcomePage(Model model) {
         model.addAttribute("orders", orderService.getAllOrders());
         return "orders";
