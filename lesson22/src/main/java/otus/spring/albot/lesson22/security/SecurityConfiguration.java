@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @EnableWebSecurity
 @AllArgsConstructor
@@ -21,16 +22,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login**").anonymous()
                 .antMatchers("/webjars/**", "/js/**").permitAll()
+                .antMatchers("/orders/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login").usernameParameter("my_username").passwordParameter("my_password")
                 .and()
-                .logout().logoutUrl("/perform-logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID");
+                .logout().logoutUrl("/perform-logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new MyAccessDeniedHandler();
     }
 
     @Override

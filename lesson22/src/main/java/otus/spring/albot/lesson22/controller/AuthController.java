@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class AuthController {
 
     @GetMapping(value = "login")
     public String login() {
@@ -16,5 +16,10 @@ public class LoginController {
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
+    }
+
+    @GetMapping(value = "403")
+    public String forbiddenPage() {
+        return "error403";
     }
 }

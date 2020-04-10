@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Product</title>
@@ -9,13 +10,13 @@
 <div th:insert="header :: div"/>
 <div class="container">
     <h3 th:text="#{productHeader(${product.name})}">Product test</h3>
-    <a th:href="@{/product/edit(id=${product.id})}" th:text="#{product.edit}">Edit product</a>
-    <a th:href="@{/product/delete(id=${product.id})}" th:text="#{product.delete}">Delete product</a>
+    <a th:href="@{/product/edit(id=${product.id})}" th:text="#{product.edit}" sec:authorize="hasAnyRole('ADMIN')">Edit product</a>
+    <a th:href="@{/product/delete(id=${product.id})}" th:text="#{product.delete}" sec:authorize="hasAnyRole('ADMIN')">Delete product</a>
     <form th:action="@{/products/__${product.id}__}" method="post">
         <ul>
             <li th:each="note : ${product.notes}">
                 <span th:text="${note.comment}">Note</span>
-                <input type="submit" th:onclick="'deleteNote(' + ${note.id} + ')'" th:value="#{product.removeNote}"/>
+                <input type="submit" th:onclick="'deleteNote(' + ${note.id} + ')'" th:value="#{product.removeNote}" />
             </li>
         </ul>
         <input id="noteToDelete" name="noteToDelete" type="hidden"/>
