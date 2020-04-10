@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: lesson13
+logging:
+  level:
+    root: error
