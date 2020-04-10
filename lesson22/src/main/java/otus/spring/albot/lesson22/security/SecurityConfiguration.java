@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login**").anonymous()
                 .antMatchers("/webjars/**", "/js/**").permitAll()
-                .antMatchers("/orders/**").hasRole("ADMIN")
+                .antMatchers("/orders/**", "/").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .loginPage("/login").usernameParameter("my_username").passwordParameter("my_password")
