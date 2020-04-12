@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      port: 0
+      database: lesson20
+#      uri: mongodb://localhost
+#      port: 27017
+#      username: root
+#      password: root
+logging:
+  level:
+    root: info
