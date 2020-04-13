@@ -42,7 +42,7 @@ class AuthorControllerTest {
     }
 
     @Test
-    void getAuthorById() {
+    void getAuthorByName() {
         Author pushkin = new Author("Pushkin");
         given(authorService.findByName(pushkin.getName())).willReturn(Mono.just(pushkin));
         webClient.get().uri(b -> b.path("/author").queryParam("name", pushkin.getName()).build())
