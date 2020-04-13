@@ -26,10 +26,8 @@ public class BookController {
     }
 
     @PostMapping(value = "books")
-    public Mono<Book> saveBook(@RequestParam("bookName") String bookName,
-                               @RequestParam("authorId") String authorId,
-                               @RequestParam("genreId") String genreId) {
-        return bookService.addNewBook(bookName, authorId, genreId);
+    public Mono<Book> saveBook(@RequestBody Book book) {
+        return bookService.addNewBook(book);
     }
 
     @DeleteMapping(value = "books")

@@ -44,12 +44,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public Mono<Book> addNewBook(final String name, String authorId, String genreId) {
-        return authorRepo.findById(authorId)
-                .switchIfEmpty(Mono.error(new NoSuchAuthorException(String.format("No author with such Id: %s", authorId))))
-                .zipWith(genreRepo.findById(genreId)
-                        .switchIfEmpty(Mono.error(new NoSuchGenreException(String.format("No genre with such id: %s", genreId)))),
-                        (author, genre) -> new Book(name, author, genre)).flatMap(bookRepo::save);
+    public Mono<Book> addNewBook(final Book book) {
+        return authorRepo.findById(book.getAuthor().getId())
+                .switchIfEmpty(Mono.error(new NoSuchAuthorException(String.format("No author with such Id: %s", book.getAuthor().getId()))))
+                .zipWith(genreRepo.findById(book.getGenre().getId())
+                        .switchIfEmpty(Mono.error(new NoSuchGenreException(String.format("No genre with such id: %s", book.getGenre().getId())))),
+                        (author, genre) -> new Book(book.getName(), author, genre)).flatMap(bookRepo::save);
     }
 
     @Override

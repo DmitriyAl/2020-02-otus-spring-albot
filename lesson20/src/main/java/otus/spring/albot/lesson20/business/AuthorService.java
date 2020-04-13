@@ -13,5 +13,5 @@ public interface AuthorService {
 
     Mono<Void> removeAuthorById(String id);
 
-    Mono<Author> changeAuthorName(String id, String newName);
+    Mono<Author> changeAuthorName(Author author);
 }

@@ -13,7 +13,7 @@ public interface BookService {
 
     Flux<Book> findAllBooksByAuthorId(String id);
 
-    Mono<Book> addNewBook(String name, String authorId, String genreId);
+    Mono<Book> addNewBook(Book book);
 
     Mono<Void> removeBookById(String id);
 }

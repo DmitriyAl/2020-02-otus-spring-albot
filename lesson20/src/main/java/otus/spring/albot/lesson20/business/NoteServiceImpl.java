@@ -19,10 +19,11 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     @Transactional
-    public Mono<Note> addNoteToBook(String bookId, final String textNote) {
-        return bookRepo.findById(bookId)
-                .switchIfEmpty(Mono.error(new NoSuchBookException(String.format("No book with such id: %s", bookId))))
-                .flatMap(book -> noteRepo.save(new Note(textNote, book)));
+    public Mono<Note> addNoteToBook(Note note) {
+        return bookRepo.findById(note.getBook().getId())
+                .switchIfEmpty(Mono.error(new NoSuchBookException(String
+                        .format("No book with such id: %s", note.getBook().getId()))))
+                .flatMap(book -> noteRepo.save(new Note(note.getNote(), book)));
     }
 
     @Override

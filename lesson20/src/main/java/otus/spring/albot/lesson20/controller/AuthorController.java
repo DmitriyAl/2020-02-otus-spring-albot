@@ -28,8 +28,8 @@ public class AuthorController {
     }
 
     @PutMapping(value = "authors")
-    public Mono<String> renameAuthor(@RequestBody Author author) {
-        return authorService.changeAuthorName(author.getId(), author.getName()).map(Author::getName);
+    public Mono<Author> renameAuthor(@RequestBody Author author) {
+        return authorService.changeAuthorName(author);
     }
 
     @DeleteMapping(value = "authors")

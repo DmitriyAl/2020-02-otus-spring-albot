@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface NoteService {
-    Mono<Note> addNoteToBook(String bookId, String note);
+    Mono<Note> addNoteToBook(Note note);
 
     Mono<Void> removeNote(String id);
 

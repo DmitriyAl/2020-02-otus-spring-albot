@@ -36,10 +36,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Mono<Author> changeAuthorName(String id, final String newName) {
-        return authorRepo.findById(id)
-                .switchIfEmpty(Mono.error(new NoSuchAuthorException(String.format("No such author with id: %s", id))))
-                .map(a -> changeName(a, newName)).flatMap(authorRepo::save);
+    public Mono<Author> changeAuthorName(Author author) {
+        return authorRepo.findById(author.getId())
+                .switchIfEmpty(Mono
+                        .error(new NoSuchAuthorException(String.format("No such author with id: %s", author.getId()))))
+                .map(a -> changeName(a, author.getName())).flatMap(authorRepo::save);
     }
 
     private Author changeName(Author author, String name) {

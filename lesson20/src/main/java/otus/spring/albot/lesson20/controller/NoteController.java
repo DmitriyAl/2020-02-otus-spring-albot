@@ -14,8 +14,8 @@ public class NoteController {
     private NoteService noteService;
 
     @PostMapping(value = "notes")
-    public Mono<Note> addNoteToBook(@RequestParam("bookId") String bookId, @RequestParam("note") String note) {
-        return noteService.addNoteToBook(bookId, note);
+    public Mono<Note> addNoteToBook(@RequestBody Note note) {
+        return noteService.addNoteToBook(note);
     }
 
     @DeleteMapping(value = "notes")
