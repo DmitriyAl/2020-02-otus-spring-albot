@@ -18,7 +18,7 @@ public class AuthorController {
     }
 
     @GetMapping(value = "author")
-    public Mono<Author> getAuthorById(@RequestParam("name") String name) {
+    public Mono<Author> getAuthorByName(@RequestParam("name") String name) {
         return authorService.findByName(name);
     }
 

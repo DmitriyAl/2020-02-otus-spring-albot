@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      database: lesson20
+      port: 0
+logging:
+  level:
+    root: info
