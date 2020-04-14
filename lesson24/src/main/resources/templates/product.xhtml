@@ -16,7 +16,7 @@
         <ul>
             <li th:each="note : ${product.notes}">
                 <span th:text="${note.comment}">Note</span>
-                <input type="submit" th:onclick="'deleteNote(' + ${note.id} + ')'" th:value="#{product.removeNote}" />
+                <input type="submit" th:onclick="'deleteNote(' + ${note.id} + ')'" th:value="#{product.removeNote}" sec:authorize="hasAnyRole('ADMIN')"/>
             </li>
         </ul>
         <input id="noteToDelete" name="noteToDelete" type="hidden"/>
