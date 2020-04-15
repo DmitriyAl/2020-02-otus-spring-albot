@@ -10,7 +10,7 @@
 <div th:insert="header :: div"/>
 <div class="container">
     <h3 th:text="#{productHeader(${product.name})}">Product test</h3>
-    <a th:href="@{/product/edit(id=${product.id})}" th:text="#{product.edit}" sec:authorize="hasAnyRole('ADMIN')">Edit product</a>
+    <a th:href="@{/product/edit(id=${product.id})}" th:text="#{product.edit}">Edit product</a>
     <a th:href="@{/product/delete(id=${product.id})}" th:text="#{product.delete}" sec:authorize="hasAnyRole('ADMIN')">Delete product</a>
     <form th:action="@{/products/__${product.id}__}" method="post">
         <ul>

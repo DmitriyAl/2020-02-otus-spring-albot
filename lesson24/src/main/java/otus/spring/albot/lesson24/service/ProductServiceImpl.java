@@ -1,6 +1,8 @@
 package otus.spring.albot.lesson24.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +19,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    @PreAuthorize("isFullyAuthenticated()")
+    @PostFilter("hasPermission(filterObject, 'READ')")
     public List<Product> getAllProducts() {
         return productRepo.findAll();
     }
 
     @Override
-    @PreAuthorize("isFullyAuthenticated()")
+    @PostAuthorize("hasPermission(returnObject, 'READ')")
     public Product getProductById(Long id) {
         return productRepo.findById(id).orElse(null);
     }
@@ -45,14 +47,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    @PreAuthorize("isFullyAuthenticated()")
+    @PreAuthorize("hasPermission(#product, 'WRITE')")
     public Product save(Product product) {
         return productRepo.save(product);
     }
 
     @Override
     @Transactional
-    @PreAuthorize("isFullyAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteProduct(Long id) {
         productRepo.deleteById(id);
     }
