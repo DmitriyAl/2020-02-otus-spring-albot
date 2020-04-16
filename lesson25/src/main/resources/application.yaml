@@ -1,12 +1,11 @@
 spring:
   batch:
     job:
-      enabled: true
+      enabled: false
 
   data:
     mongodb:
-      uri: mongodb://localhost
-      port: 27017
+      port: 0
       database: lesson25
 
   datasource:
