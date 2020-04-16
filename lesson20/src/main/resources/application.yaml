@@ -2,8 +2,9 @@ spring:
   data:
     mongodb:
       database: lesson20
-      port: 27017
-      host: localhost
+      port: 0
+#      port: 27017
+#      host: localhost
 logging:
   level:
     root: info
