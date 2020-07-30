@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="app-header">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"/>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a th:href="@{/orders}" class="nav-link" href="#" th:text="#{header.ordersLink}">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/products}" class="nav-link" href="#" th:text="#{header.productsLink}">Products<span
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="form-inline">
+            <label for="langBox" class="text-secondary" th:text="#{header.language}">Lang</label>
+            <select id="langBox" name="lang">
+                <option value=""></option>
+                <option value="en">EN</option>
+                <option value="ru_RU">RU</option>
+            </select>
+            <a th:href="@{/perform-logout}" class="btn btn-danger" th:text="#{header.logout}"
+               sec:authorize="isAuthenticated()">Logout</a>
+        </div>
+    </nav>
+    <script th:src="@{/js/header.js}"></script>
+</div>
+</body>
+</html>

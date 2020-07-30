@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Order</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="header :: div"/>
+<div class="container">
+    <form method="post" class="form-signin justify-content-center">
+        <div class="form-group">
+            <label for="exampleInputEmail1" th:text="#{login.user}">Login</label>
+            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   th:placeholder="#{login.user.placeholder}" name="my_username"/>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" th:text="#{login.password}">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" th:placeholder="#{login.password}" name="my_password"/>
+        </div>
+        <button type="submit" class="btn btn-primary"  th:text="#{login.login}">Submit</button>
+        <div th:if="${param.error}" class="alert alert-danger" role="alert" th:text="#{login.failed}">
+            login failed
+        </div>
+    </form>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
