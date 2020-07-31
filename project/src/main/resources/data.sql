@@ -1,3 +1,13 @@
+insert into users (login, password)
+values ('admin', '$2y$10$vr31PYc..uozm9PR2sTN7uPE4vkCRiwAyNjQOqo2T0gBlXgS2GUJC'),
+       ('user', '$2y$10$o.3wINvWxj0CWi2pHI3rHeDjp1qymTkLGtDEt4ilZpuFfCh1PpyAi');
+insert into authorities (name)
+values ('ROLE_ADMIN'),
+       ('ROLE_USER');
+insert into user_authority (user_id, authority_id)
+VALUES (1, 1),
+       (1, 2),
+       (2, 2);
 insert into products (name, description) values
 ('laptop', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem delectus eaque, ex excepturi incidunt inventore.'),
  ('monitor', 'Laboriosam minima mollitia necessitatibus nesciunt nobis perferendis ratione sit, sunt veritatis voluptas, voluptate.'),
