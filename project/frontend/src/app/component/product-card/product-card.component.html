@@ -1,0 +1,9 @@
+<button *ngIf="removable" type="button" class="close remove-product-btn" aria-label="Close" (click)="removeProduct()">
+  <span aria-hidden="true">&times;</span>
+</button>
+<input *ngIf="selectable" type="checkbox" class="add-to-order-checkbox" [(ngModel)]="product.selected">
+<img class="card-img-top" src="https://via.placeholder.com/286x172" alt="Card image cap">
+<div class="card-body">
+  <a [routerLink]="['/products', product.productDto.id]"><h5 class="card-title">{{product.productDto.name}}</h5></a>
+  <p class="card-text">{{product.productDto.description}}</p>
+</div>

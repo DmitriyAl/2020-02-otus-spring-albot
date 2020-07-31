@@ -1,0 +1,23 @@
+{
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "orders": {
+    "orders": "Заказы",
+    "order": "Заказ",
+    "noSelected": "Выберите интересующий Вас заказ",
+    "changeOrder": "Редактировать заказ"
+  },
+  "products": {
+    "createNewOrder": "Сохранить новый заказ",
+    "cancel": "Отмена",
+    "saveOrder": "Сохранить заказ",
+    "addProduct": "Создать продукт",
+    "orderCreated": "Создан заказ с номером "
+  },
+  "product": {
+    "editProduct": "Изменить описание",
+    "addComment": "Добавить комментарий"
+  }
+}
