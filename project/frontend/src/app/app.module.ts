@@ -7,7 +7,7 @@ import {HeaderComponent} from './header/header.component';
 import {HomeComponent} from './page/home/home.component';
 import {OrdersComponent} from './component/orders/orders.component';
 import {ProductsListComponent} from './component/products-list/products-list.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {ProductCardComponent} from './component/product-card/product-card.component';
@@ -16,6 +16,8 @@ import {ProductsComponent} from './page/products/products.component';
 import {NotifierModule} from "angular-notifier";
 import {notifierOptions} from "./utils/notifier-options";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './page/login/login.component';
+import {BasicAuthInterceptorService} from "./security/basic-auth-interceptor.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -30,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductsListComponent,
     ProductCardComponent,
     ProductComponent,
-    ProductsComponent
+    ProductsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 

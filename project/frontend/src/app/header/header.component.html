@@ -23,8 +23,8 @@
           </ul>
         </li>
       </ul>
-<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="logout()" translate>header.logout-->
-<!--      </button>-->
+      <button *ngIf="isLoggedIn()" class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logout()">Logout
+      </button>
     </form>
   </div>
 </nav>
