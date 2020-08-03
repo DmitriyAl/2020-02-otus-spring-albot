@@ -5,6 +5,7 @@ import {OrdersService} from "../../component/orders/orders.service";
 import {NotifierService} from "angular-notifier";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderDto} from "../../dto/orderDto";
+import {AuthenticationService} from "../../security/authentication.service";
 
 @Component({
   selector: 'app-products',
@@ -20,7 +21,8 @@ export class ProductsComponent implements OnInit {
               private ordersService: OrdersService,
               private notifier: NotifierService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private authentication: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -75,5 +77,9 @@ export class ProductsComponent implements OnInit {
 
   addNewProduct() {
     this.router.navigate(['/products/new'])
+  }
+
+  isAdmin() {
+    return this.authentication.isAdmin()
   }
 }

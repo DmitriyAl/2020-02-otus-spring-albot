@@ -6,9 +6,9 @@
     <div class="col-md-7">
       <h2 *ngIf="!editMode">{{product.productDto.name}}</h2>
       <p *ngIf="!editMode">{{product.productDto.description}}</p>
-      <input *ngIf="editMode" [(ngModel)]="product.productDto.name">
-      <textarea *ngIf="editMode" rows="5" [(ngModel)]="product.productDto.description"></textarea>
-      <button *ngIf="!editMode" (click)="switchToEditMode(true)"
+      <input *ngIf="editMode" [(ngModel)]="product.productDto.name" required>
+      <textarea *ngIf="editMode" rows="5" [(ngModel)]="product.productDto.description" required></textarea>
+      <button *ngIf="!editMode && isAdmin()" (click)="switchToEditMode(true)"
               class="btn btn-primary">{{'product.editProduct'|translate}}</button>
       <button *ngIf="editMode" (click)="switchToEditMode(false)"
               class="btn btn-danger">{{'common.cancel'|translate}}</button>
@@ -20,14 +20,18 @@
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let note of notes">
         <span>{{note.noteDto.comment}}</span>
-        <button type="button" class="close remove-order-btn" aria-label="Close" (click)="removeNote(note)">
+        <button *ngIf="isAdmin()" type="button" class="close remove-order-btn" aria-label="Close"
+                (click)="removeNote(note)">
           <span aria-hidden="true">&times;</span>
         </button>
       </li>
     </ul>
-    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
-      <textarea [formControl]="form.controls['comment']"></textarea>
-      <button type="submit" class="btn btn-primary">{{'product.addComment'|translate}}</button>
+    <form [formGroup]="commentForm" (ngSubmit)="submit(commentForm.value)">
+      <textarea [formControl]="commentForm.controls['comment']"></textarea>
+      <div class="alert-danger" *ngIf="commentForm.touched && !commentForm.valid">
+        {{'product.emptyComment'|translate}}
+      </div>
+      <button type="submit" class="btn btn-primary add-comment">{{'product.addComment'|translate}}</button>
     </form>
   </div>
 </div>

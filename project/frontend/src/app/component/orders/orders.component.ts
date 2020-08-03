@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {OrdersService} from "./orders.service";
 import {Order} from "../../model/order";
+import {AuthenticationService} from "../../security/authentication.service";
 
 @Component({
   selector: 'app-orders',
@@ -12,7 +13,7 @@ export class OrdersComponent implements OnInit {
   selectedOrder: Order;
   @Output() orderSelected: EventEmitter<Order> = new EventEmitter<Order>();
 
-  constructor(private service: OrdersService) {
+  constructor(private service: OrdersService, private authentication: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -43,5 +44,9 @@ export class OrdersComponent implements OnInit {
       this.updateOrders();
       this.orderSelected.emit(null);
     }, error => console.log(error));
+  }
+
+  isAdmin() {
+    return this.authentication.isAdmin()
   }
 }
