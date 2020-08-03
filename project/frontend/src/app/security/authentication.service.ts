@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {JwtResponse} from "./model/jwt-response";
+import {api} from "../utils/api";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthenticationService {
   }
 
   authenticate(username, password) {
-    return this.http.post<JwtResponse>('http://localhost:8080/authenticate', {username, password}).pipe(map(userData => {
+    return this.http.post<JwtResponse>(api.authenticate, {username, password}).pipe(map(userData => {
       sessionStorage.setItem('username', username);
       let tokenStr = 'Bearer ' + userData.jwtToken;
       sessionStorage.setItem('token', tokenStr);
