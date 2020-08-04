@@ -1,4 +1,15 @@
 {
+  "header": {
+    "orders": "Заказы",
+    "products": "Продукты",
+    "logout": "Выход"
+  },
+  "login": {
+    "header": "Вход в систему",
+    "login": "Логин",
+    "password": "Пароль",
+    "enter": "Войти"
+  },
   "common": {
     "save": "Сохранить",
     "cancel": "Отмена"
