@@ -16,7 +16,7 @@ import {ProductsComponent} from './page/products/products.component';
 import {NotifierModule} from "angular-notifier";
 import {notifierOptions} from "./utils/notifier-options";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { LoginComponent } from './page/login/login.component';
+import {LoginComponent} from './page/login/login.component';
 import {BasicAuthInterceptorService} from "./security/basic-auth-interceptor.service";
 
 export function HttpLoaderFactory(http: HttpClient) {

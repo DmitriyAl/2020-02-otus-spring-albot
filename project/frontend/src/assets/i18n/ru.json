@@ -2,7 +2,8 @@
   "header": {
     "orders": "Заказы",
     "products": "Продукты",
-    "logout": "Выход"
+    "logout": "Выход",
+    "language": "Русский"
   },
   "login": {
     "header": "Вход в систему",
@@ -18,14 +19,20 @@
     "orders": "Заказы",
     "order": "Заказ",
     "noSelected": "Выберите интересующий Вас заказ",
-    "changeOrder": "Редактировать заказ"
+    "changeOrder": "Редактировать заказ",
+    "changed": "Заказ №{{number}} был изменен",
+    "created": "Был создан новый заказ №{{number}}"
   },
   "products": {
     "createNewOrder": "Сохранить новый заказ",
     "cancel": "Отмена",
     "saveOrder": "Сохранить заказ",
     "addProduct": "Создать продукт",
-    "orderCreated": "Создан заказ с номером "
+    "orderCreated": "Создан заказ с номером ",
+    "deletionError": {
+      "multiple": "Заказы {{orders}} содержат данный продукт",
+      "single": "Заказ {{order}} содержит данный продукт"
+    }
   },
   "product": {
     "editProduct": "Изменить описание",

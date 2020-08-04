@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../security/authentication.service";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authentication: AuthenticationService, private router: Router) { }
+  constructor(private authentication: AuthenticationService, private router: Router, private translateService: TranslateService) { }
 
   ngOnInit() {
   }
@@ -21,5 +22,9 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.authentication.isUserLoggedIn()
+  }
+
+  useLanguage(lang: string) {
+    this.translateService.use(lang);
   }
 }

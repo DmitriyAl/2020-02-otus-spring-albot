@@ -6,6 +6,7 @@ import {NotifierService} from "angular-notifier";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrderDto} from "../../dto/orderDto";
 import {AuthenticationService} from "../../security/authentication.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-products',
@@ -22,7 +23,8 @@ export class ProductsComponent implements OnInit {
               private notifier: NotifierService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private authentication: AuthenticationService) {
+              private authentication: AuthenticationService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -67,9 +69,11 @@ export class ProductsComponent implements OnInit {
     });
     this.ordersService.createNewOrder(order).subscribe(o => {
       if (order.id) {
-        this.notifier.notify('success', 'Ордер №' + o.id.toString() + ' был изменен');
+        this.translateService.get('orders.changed', {number: o.id.toString()})
+          .subscribe(translation => this.notifier.notify('success', translation))
       } else {
-        this.notifier.notify('success', 'Был создан новый ордер №' + o.id.toString());
+        this.translateService.get('orders.created', {number: o.id.toString()})
+          .subscribe(translation => this.notifier.notify('success', translation))
       }
       this.router.navigate(['']);
     });
