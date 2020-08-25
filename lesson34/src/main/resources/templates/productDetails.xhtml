@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/static/css/styles.css} "/>
+</head>
+<body>
+<div th:insert="header :: div"/>
+<div class="container">
+    <form th:action="@{/product/save}" th:object="${product}" method="post">
+        <label th:value="#{productDetails.name}" for="productName">Product name</label>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{notes}"/>
+        <input type="hidden" th:field="*{orders}"/>
+        <input id="productName" th:field="*{name}"/>
+        <input type="submit" th:value="#{productDetails.save}"/>
+    </form>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

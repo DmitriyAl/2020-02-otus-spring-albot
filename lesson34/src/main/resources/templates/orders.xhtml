@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>OrderList</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:insert="header :: div"/>
+<div class="container">
+    <form th:action="@{/orders/remove}" method="post">
+        <ul>
+            <li th:each="order, iter : ${orders}">
+                <a th:href="@{/orders/__${order.id}__}" th:text="#{orderList(${order.id})}">link</a>
+                <input th:id="'orderToDelete' + ${iter.index}" type="checkbox" name="orderToDelete" th:value="${order.id}"/>
+            </li>
+        </ul>
+        <input type="submit" th:value="#{orders.removeOrders}"/>
+    </form>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
