@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{'login.header'|translate}}</h5>
+          <form [formGroup]="form" (ngSubmit)="checkLogin(form.value)" class="form-signin">
+            <div class="form-label-group">
+              <input [formControl]="form.controls['username']" type="text" id="login" class="form-control"
+                     placeholder="{{'login.login'|translate}}" required autofocus>
+            </div>
+            <div class="form-label-group">
+              <input [formControl]="form.controls['password']" type="password" id="password" class="form-control"
+                     placeholder="{{'login.password'|translate}}" required>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{'login.enter'|translate}}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

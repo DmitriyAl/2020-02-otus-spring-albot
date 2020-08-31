@@ -1,0 +1,21 @@
+FROM node:14.7.0 AS build
+
+ENV PROJECT_DIR=/opt/ng
+WORKDIR $PROJECT_DIR
+
+ADD ./frontend/angular.json $PROJECT_DIR
+ADD ./frontend/browserslist $PROJECT_DIR
+ADD ./frontend/karma.conf.js $PROJECT_DIR
+ADD ./frontend/package.json $PROJECT_DIR
+ADD ./frontend/package-lock.json $PROJECT_DIR
+ADD ./frontend/tsconfig.app.json $PROJECT_DIR
+ADD ./frontend/tsconfig.json $PROJECT_DIR
+ADD ./frontend/tsconfig.spec.json $PROJECT_DIR
+ADD ./frontend/tslint.json $PROJECT_DIR
+ADD ./frontend/src $PROJECT_DIR/src
+
+RUN npm install
+RUN npm run build
+
+FROM nginx:1.19.1-alpine
+COPY --from=build /opt/ng/dist/frontend /usr/share/nginx/html

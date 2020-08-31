@@ -1,0 +1,42 @@
+{
+  "header": {
+    "orders": "Orders",
+    "products": "Products",
+    "logout": "Logout",
+    "language": "English"
+  },
+  "login": {
+    "header": "Login to the system",
+    "login": "Login",
+    "password": "Password",
+    "enter": "Login"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "orders": {
+    "orders": "Orders",
+    "order": "Order",
+    "noSelected": "Choose the order",
+    "changeOrder": "Change the order",
+    "changed": "Order №{{number}} was modified",
+    "created": "A new order №{{number}} was created"
+  },
+  "products": {
+    "createNewOrder": "Save a new order",
+    "cancel": "Cancel",
+    "saveOrder": "Save an order",
+    "addProduct": "Create a product",
+    "orderCreated": "A new order has number ",
+    "deletionError": {
+      "multiple": "The orders {{orders}} contain this product",
+      "single": "The order {{order}} contains this product"
+    }
+  },
+  "product": {
+    "editProduct": "Change the description",
+    "addComment": "Add a comment",
+    "emptyComment": "Comment should not be empty"
+  }
+}

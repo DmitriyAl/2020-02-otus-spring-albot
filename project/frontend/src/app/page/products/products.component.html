@@ -1,0 +1,14 @@
+<div class="buttons-row">
+  <button *ngIf="!editMode" class="btn btn-primary"
+          (click)="newOrderMode(true)">{{'products.createNewOrder'|translate}}</button>
+  <button *ngIf="!editMode && isAdmin()" class="btn btn-primary"
+          (click)="addNewProduct()">{{'products.addProduct'|translate}}</button>
+  <button *ngIf="editMode" class="btn btn-danger"
+          (click)="newOrderMode(false)">{{'products.cancel'|translate}}</button>
+  <button *ngIf="editMode" class="btn btn-success" (click)="createOrder()">{{'products.saveOrder'|translate}}</button>
+</div>
+<div class="product-list">
+  <app-products-list [products]="products" [removable]="isAdmin()" [selectable]="editMode"
+                     (updateList)="updateProducts()">
+  </app-products-list>
+</div>

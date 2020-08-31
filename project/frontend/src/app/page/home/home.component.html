@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-3">
+    <app-orders (orderSelected)="updateOrder($event)"></app-orders>
+    <div>
+      <button class="btn btn-primary edit-order" [attr.disabled]="!order ? '' : null"
+              (click)="changeOrder()">{{'orders.changeOrder'|translate}}</button>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <h2 *ngIf="!order">{{'orders.noSelected' | translate}}</h2>
+    <div *ngIf="order">
+      <app-products-list [products]="order.products"></app-products-list>
+    </div>
+  </div>
+</div>

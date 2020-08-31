@@ -1,0 +1,8 @@
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action" [class.active]="isSelected(order)" *ngFor="let order of orders" (click)="updateOrder(order)">
+    {{'orders.order' | translate}}{{' №'}}{{order.orderDto.id}}
+    <button *ngIf="isAdmin()" type="button" class="close remove-order-btn" aria-label="Close" (click)="removeOrder($event, order)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </a>
+</div>
